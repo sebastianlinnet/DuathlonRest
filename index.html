@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script defer src="script.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.js"></script>
+    <script src="https://unpkg.com/vue@next"></script>
+    <title>Duathlon HTML/JS/AXIOS/VUE/BOOT</title>
+    <style>
+        body{
+            overflow-x: hidden;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div class="row">
+        <div class="col-sm-4">
+            <h1>Get all duathletes</h1>
+            <button v-on:click="getDuathletes()">Get duathletes</button>
+
+            <table id="duathleteList" class="table table-striped" v-if="duathletes.length">
+                <tr>
+                    <th>Bib:</th>
+                    <th>Name:</th>
+                    <th>Age group:</th>
+                    <th>Bike time:</th>
+                    <th>Run time:</th>
+                    <th>Total time:</th>
+                </tr>
+                <tr v-for="duathlete in duathletes">
+                    <td>{{duathlete.bib}}</td>
+                    <td>{{duathlete.name}}</td>
+                    <td>{{duathlete.ageGroup}}</td>
+                    <td>{{duathlete.bike}}</td>
+                    <td>{{duathlete.run}}</td>
+                    <td>{{duathlete.total}}</td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-sm-4">
+            <h1>Get single duathlete by bib</h1>
+            <input v-model="bibToGet" placeholder="Enter Bib" type="number">
+            <button v-on:click="getByBib(bibToGet)" class="btn btn-primary">Get by bib!</button>
+            <p id="singleDuathleteList" v-if="singleDuathlete">
+                {{singleDuathlete.name}}
+            </p>
+            <p v-else>No bib detected</p>
+        </div>
+        <div class="col-sm-4">
+            <h1>Delete duathlete</h1>
+            <input v-model.number="deleteBib" placeholder="id" type="number" />
+            <button v-on:click="deleteDuathlete(deleteBib)" class="btn btn-warning">Delete</button>
+            <p>
+                {{deleteMessage}}
+            </p>
+        </div>
+    </div>
+    </div>
+</body>
+
+</html>
